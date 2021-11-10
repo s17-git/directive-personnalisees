@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directive Personnalisées</title>
+</head>
+<body>
+    
+
+    <div id="app">
+
+        <div v-formattitle="{niveau: 1, couleur: 'indigo', valeur: 'Mon titre formater', fontSize: '30px'}"></div>
+       
+    </div>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+    
+        const RootComponent = {
+
+        }
+
+        const app = Vue.createApp(RootComponent)
+
+            app.directive('formattitle',{
+                beforeMount(el, binding) {
+                    el.style.color = binding.value.couleur;
+                    el.style.fontSize = binding.value.fontSize;
+                    el.innerHTML = ` <h${binding.value.niveau}>${binding.value.valeur}</h${binding.value.niveau}>`;
+                }
+            })
+
+        const vm = app.mount("#app");
+    </script>
+</body>
+</html>
